@@ -5,8 +5,31 @@ jQuery(function($) {
   $('#payment-form').submit(function(event) {
     var $form = $(this);
 
+    if (Stripe.validateCardNumber($('.card-number').val()) == false) {
+        $form.find('.payment-errors').removeClass("hide");
+        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid card number.");
+        $form.find('button').prop('disabled', false);
+        return false;
+    }
+
+    if (Stripe.validateCVC($('.card-cvc').val()) == false) {
+        $form.find('.payment-errors').removeClass("hide");
+        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid CVC.");
+        $form.find('button').prop('disabled', false);
+        return false;
+    }
+
+    if (Stripe.validateExpiry($('.card-expiry').val().split(" / ")[0], $('.card-expiry').val().split(" / ")[1]) == false) {
+        $form.find('.payment-errors').removeClass("hide");
+        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid expiry date. Make sure it follows the MM/YYYY format");
+        $form.find('button').prop('disabled', false);
+        return false;
+    }
+
     // Disable the submit button to prevent repeated clicks
     $form.find('button').prop('disabled', true);
+
+    $form.find('.payment-errors').addClass("hide");
 
     Stripe.card.createToken({
         number: $('.card-number').val(),
