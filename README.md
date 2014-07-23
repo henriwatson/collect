@@ -1,3 +1,5 @@
+![Screenshot](screenshot.png)
+
 # collect
 Tiny PHP script to easily collect payments through Stripe.
 
