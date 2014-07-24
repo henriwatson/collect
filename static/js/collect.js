@@ -6,22 +6,22 @@ jQuery(function($) {
     var $form = $(this);
 
     if (Stripe.validateCardNumber($('.card-number').val()) == false) {
-        $form.find('.payment-errors').removeClass("hide");
-        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid card number.");
+        $('.payment-errors').removeClass("hide");
+        $('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid card number.");
         $form.find('button').prop('disabled', false);
         return false;
     }
 
     if (Stripe.validateCVC($('.card-cvc').val()) == false) {
-        $form.find('.payment-errors').removeClass("hide");
-        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid CVC.");
+        $('.payment-errors').removeClass("hide");
+        $('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid CVC.");
         $form.find('button').prop('disabled', false);
         return false;
     }
 
     if (Stripe.validateExpiry($('.card-expiry').val().split(" / ")[0], $('.card-expiry').val().split(" / ")[1]) == false) {
-        $form.find('.payment-errors').removeClass("hide");
-        $form.find('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid expiry date. Make sure it follows the MM/YYYY format");
+        $('.payment-errors').removeClass("hide");
+        $('.payment-errors').html("<b>Uh oh!</b> Seems you didn't enter a valid expiry date. Make sure it follows the MM/YYYY format");
         $form.find('button').prop('disabled', false);
         return false;
     }
@@ -49,12 +49,12 @@ function stripeResponseHandler(status, response) {
 
     if (response.error) {
         // Show the errors on the form
-        $form.find('.payment-errors').removeClass("hide");
-        $form.find('.payment-errors').html("<strong>Whoops!</strong> " + response.error.message);
-        $form.find('button').prop('disabled', false);
+        $('.payment-errors').removeClass("hide");
+        $('.payment-errors').html("<strong>Whoops!</strong> " + response.error.message);
+        $('button').prop('disabled', false);
     } else {
         var token = response.id;
-        $form.find('.payment-errors').addClass("hide");
+        $('.payment-errors').addClass("hide");
         $form.append($('<input type="hidden" name="token" />').val(token));
         $form.get(0).submit();
     }
