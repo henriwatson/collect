@@ -1,4 +1,14 @@
 <?php
+if (!file_exists('vendor/autoload.php')) {
+    die("Please run composer install");
+}
+if (!file_exists('static/components')) {
+    die("Please run bower install");
+}
+if (!file_exists('config.php')) {
+    die("Please create a config file");
+}
+
 require 'vendor/autoload.php';
 require 'config.php';
 
