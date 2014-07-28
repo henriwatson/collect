@@ -18,6 +18,16 @@ $app->userconfig = json_decode($configjson, true);
 
 Stripe::setApiKey($app->userconfig['app']['stripe_sk']);
 
+$app->get('/', function () use ($app) {
+    $collections = $app->userconfig['collections'];
+    ksort($collections);
+
+    $app->render('collect_list.php', array(
+        'config' => $app->userconfig['app'],
+        'collections' => $collections
+    ));
+});
+
 $app->get('/collect/:id', function ($id) use ($app) {
     if (!isset($app->userconfig['collections'][$id]))
         $app->notFound();
