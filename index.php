@@ -22,6 +22,16 @@ $app->get('/', function () use ($app) {
     $collections = $app->userconfig['collections'];
     ksort($collections);
 
+    foreach ($collections as $id => $collection) {
+        if (!isset($collection['public']) || $collection['public'] === false) {
+            unset($collections[$id]);
+        }
+    }
+
+    if (count($collections) === 0) {
+        $app->notFound();
+    }
+
     $app->render('collect_list.php', array(
         'config' => $app->userconfig['app'],
         'collections' => $collections

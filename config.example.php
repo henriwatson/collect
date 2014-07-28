@@ -10,6 +10,7 @@ $configjson = <<<JSON
         "example": {
             "title": "Example Title",
             "description": "HI BILLY MAYS HERE FOR EXAMPLE TITLE",
+            "public": true,
             "amount": "1995",
             "currency": "usd",
             "capture": "true",
