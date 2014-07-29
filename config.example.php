@@ -14,7 +14,8 @@ $configjson = <<<JSON
             "amount": "1995",
             "currency": "usd",
             "capture": "true",
-            "statement_description": "EXAMPLE"
+            "statement_description": "EXAMPLE",
+            "receipt": true
         }
     }
 }

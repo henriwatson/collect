@@ -56,14 +56,20 @@ $app->post('/collect/:id', function ($id) use ($app) {
     $collection = $app->userconfig['collections'][$id];
 
     try {
-        $charge = Stripe_Charge::create(array(
-          "amount" => $collection['amount'],
-          "currency" => $collection['currency'],
-          "card" => $app->request->post('token'),
-          "description" => $collection['title'],
-          "capture" => $collection['capture'],
-          "statement_description" => $collection['statement_description']
-        ));
+        $charge_options = array(
+            "amount" => $collection['amount'],
+            "currency" => $collection['currency'],
+            "card" => $app->request->post('token'),
+            "description" => $collection['title'],
+            "capture" => $collection['capture'],
+            "statement_description" => $collection['statement_description']
+        );
+
+        if ($collection['receipt'] === true) {
+            $charge_options['receipt_email'] = $app->request->post('card-holderemail');
+        }
+
+        $charge = Stripe_Charge::create($charge_options);
 
         $app->render('collect_success.php', array(
             'id' => $id,
