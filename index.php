@@ -65,7 +65,7 @@ $app->post('/collect/:id', function ($id) use ($app) {
             "statement_description" => $collection['statement_description']
         );
 
-        if ($collection['receipt'] === true) {
+        if (isset($collection['receipt']) && $collection['receipt'] === true) {
             $charge_options['receipt_email'] = $app->request->post('card-holderemail');
         }
 
