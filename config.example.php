@@ -2,20 +2,20 @@
 $configjson = <<<JSON
 {
     "app": {
-        "title": "Example",
         "stripe_sk": "sk_test_example",
-        "stripe_pk": "pk_test_example"
+        "stripe_pk": "pk_test_example",
+        "title": "Example",
     },
     "collections": {
         "example": {
-            "title": "Example Title",
+            "amount": "1995",
+            "capture": "true",
+            "currency": "usd",
             "description": "HI BILLY MAYS HERE FOR EXAMPLE TITLE",
             "public": true,
-            "amount": "1995",
-            "currency": "usd",
-            "capture": "true",
-            "statement_description": "EXAMPLE",
             "receipt": true
+            "statement_description": "EXAMPLE",
+            "title": "Example Title",
         }
     }
 }

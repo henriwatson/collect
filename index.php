@@ -18,6 +18,7 @@ $app->userconfig = json_decode($configjson, true);
 
 Stripe::setApiKey($app->userconfig['app']['stripe_sk']);
 
+/* Public collection listing */
 $app->get('/', function () use ($app) {
     $collections = $app->userconfig['collections'];
     ksort($collections);
@@ -38,6 +39,7 @@ $app->get('/', function () use ($app) {
     ));
 });
 
+/* View collection */
 $app->get('/collect/:id', function ($id) use ($app) {
     if (!isset($app->userconfig['collections'][$id]))
         $app->notFound();
@@ -49,6 +51,7 @@ $app->get('/collect/:id', function ($id) use ($app) {
     ));
 });
 
+/* Collect funds */
 $app->post('/collect/:id', function ($id) use ($app) {
     if (!isset($app->userconfig['collections'][$id]))
         $app->notFound();
