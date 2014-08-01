@@ -2,8 +2,8 @@
 $configjson = <<<JSON
 {
     "app": {
-        "stripe_sk": "sk_test_example",
-        "stripe_pk": "pk_test_example",
+        "stripe_sk": "",
+        "stripe_pk": "",
         "title": "Example",
     },
     "collections": {
